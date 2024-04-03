@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "arcanedims:seniorem_wooden_sword",
+    "arcanedims:seniorem_wooden_pickaxe",
+    "arcanedims:seniorem_wooden_axe",
+    "arcanedims:seniorem_wooden_shovel",
+    "arcanedims:seniorem_wooden_hoe"
+  ]
+}

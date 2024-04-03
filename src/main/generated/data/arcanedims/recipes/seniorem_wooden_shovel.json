@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "arcanedims:seniorem_planks"
+    },
+    "H": {
+      "item": "arcanedims:seniorem_stick"
+    }
+  },
+  "pattern": [
+    "#",
+    "H",
+    "H"
+  ],
+  "result": {
+    "item": "arcanedims:seniorem_wooden_shovel"
+  }
+}

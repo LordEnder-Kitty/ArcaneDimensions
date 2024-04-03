@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "arcanedims",
+	"version": "${version}",
+	"name": "Arcane Dimensions",
+	"description": "Adds new dimensions, blocks, mobs, and a whole assortment of new, unique content",
+	"authors": [
+		"LordEnder_Kitty"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/arcanedims/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [ "net.enderkitty.ArcaneDimensions" ],
+		"client": [ "net.enderkitty.ArcaneDimensionsClient" ],
+		"fabric-datagen": [ "net.enderkitty.ArcaneDimsDataGen" ]
+	},
+	"mixins": [
+		"arcanedims.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

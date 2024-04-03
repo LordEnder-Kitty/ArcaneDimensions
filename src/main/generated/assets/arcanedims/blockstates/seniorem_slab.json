@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "arcanedims:block/seniorem_slab"
+    },
+    "type=double": {
+      "model": "arcanedims:block/seniorem_planks"
+    },
+    "type=top": {
+      "model": "arcanedims:block/seniorem_slab_top"
+    }
+  }
+}

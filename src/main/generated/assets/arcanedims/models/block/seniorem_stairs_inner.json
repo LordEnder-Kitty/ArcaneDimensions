@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "arcanedims:block/seniorem_planks",
+    "side": "arcanedims:block/seniorem_planks",
+    "top": "arcanedims:block/seniorem_planks"
+  }
+}

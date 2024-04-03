@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "arcanedims:eldritch_core"
+    },
+    "B": {
+      "item": "arcanedims:blind_cage_bone"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "pattern": [
+    " C ",
+    "E#E",
+    " B "
+  ],
+  "result": {
+    "item": "arcanedims:elderlands_portal_key"
+  }
+}

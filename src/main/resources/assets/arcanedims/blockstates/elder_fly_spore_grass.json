@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "arcanedims:block/elder_fly_spore_grass_bottom"
+    },
+    "half=upper": {
+      "model": "arcanedims:block/elder_fly_spore_grass_top"
+    }
+  }
+}

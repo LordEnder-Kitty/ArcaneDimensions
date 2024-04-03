@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "arcanedims:seniorem_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "arcanedims:seniorem_planks"
+  }
+}

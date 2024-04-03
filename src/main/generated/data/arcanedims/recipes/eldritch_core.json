@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "L": {
+      "item": "minecraft:birch_log"
+    },
+    "P": {
+      "tag": "minecraft:decorated_pot_sherds"
+    }
+  },
+  "pattern": [
+    " L ",
+    "EPE",
+    " L "
+  ],
+  "result": {
+    "item": "arcanedims:eldritch_core"
+  }
+}

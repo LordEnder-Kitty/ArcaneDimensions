@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "arcanedims:block/elder_dirt",
+    "particle": "arcanedims:block/elder_dirt",
+    "side": "arcanedims:block/elder_grass_block_snow",
+    "top": "arcanedims:block/elder_grass_block_top"
+  }
+}

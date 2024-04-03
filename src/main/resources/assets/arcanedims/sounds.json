@@ -1,0 +1,11 @@
+{
+  "entity.soul_swarm.ambient": {
+    "sounds": [
+      "arcanedims:mob/soul_swarm/idle1",
+      "arcanedims:mob/soul_swarm/idle2",
+      "arcanedims:mob/soul_swarm/idle3",
+      "arcanedims:mob/soul_swarm/idle4"
+    ],
+    "subtitle": "subtitles.entity.soul_swarm.ambient"
+  }
+}

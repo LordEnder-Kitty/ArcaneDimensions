@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "arcanedims:item/ward_cage"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "has_souls": 1
+      },
+      "model": "arcanedims:item/filled_ward_cage"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "arcanedims:block/seniorem_planks"
+  }
+}

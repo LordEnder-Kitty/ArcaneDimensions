@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "arcanedims:block/seniorem_leaves"
+  }
+}

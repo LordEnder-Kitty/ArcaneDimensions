@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "arcanedims:block/elder_fly_spore_grass_top"
+  }
+}

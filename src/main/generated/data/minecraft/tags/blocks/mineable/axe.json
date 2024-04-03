@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "arcanedims:seniorem_planks",
+    "arcanedims:seniorem_log",
+    "arcanedims:seniorem_wood",
+    "arcanedims:stripped_seniorem_log",
+    "arcanedims:stripped_seniorem_wood",
+    "arcanedims:seniorem_stairs",
+    "arcanedims:seniorem_slab",
+    "arcanedims:seniorem_fence",
+    "arcanedims:seniorem_fence_gate",
+    "arcanedims:seniorem_door",
+    "arcanedims:seniorem_trapdoor",
+    "arcanedims:seniorem_pressure_plate",
+    "arcanedims:seniorem_button",
+    "arcanedims:seniorem_sign",
+    "arcanedims:seniorem_wall_sign",
+    "arcanedims:seniorem_hanging_sign",
+    "arcanedims:seniorem_wall_hanging_sign"
+  ]
+}

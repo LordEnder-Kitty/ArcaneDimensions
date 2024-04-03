@@ -1,0 +1,6 @@
+{
+  "parent": "arcanedims:item/ward_cage",
+  "textures": {
+    "layer0": "arcanedims:item/filled_ward_cage"
+  }
+}

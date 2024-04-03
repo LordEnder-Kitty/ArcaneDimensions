@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "arcanedims:block/seniorem_log_top",
+    "side": "arcanedims:block/seniorem_log"
+  }
+}

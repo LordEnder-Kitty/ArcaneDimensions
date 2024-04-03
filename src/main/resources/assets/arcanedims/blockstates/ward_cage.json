@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "arcanedims:block/ward_cage",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "arcanedims:block/ward_cage"
+    },
+    "facing=south": {
+      "model": "arcanedims:block/ward_cage",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "arcanedims:block/ward_cage",
+      "y": 270
+    }
+  }
+}

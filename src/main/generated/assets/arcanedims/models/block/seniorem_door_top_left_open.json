@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "arcanedims:block/seniorem_door_bottom",
+    "top": "arcanedims:block/seniorem_door_top"
+  }
+}

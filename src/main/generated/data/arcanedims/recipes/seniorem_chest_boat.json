@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "arcanedims:seniorem_boat"
+    }
+  ],
+  "result": {
+    "item": "arcanedims:seniorem_chest_boat"
+  }
+}

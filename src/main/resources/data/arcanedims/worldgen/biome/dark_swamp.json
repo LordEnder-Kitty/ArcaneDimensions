@@ -1,0 +1,63 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "downfall": 0.5,
+  "effects": {
+    "sky_color": 0,
+    "fog_color": 9678335,
+    "water_color": 404328,
+    "water_fog_color": 4205416,
+    "mood_sound": {
+      "sound": "minecraft:music.overworld.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    },
+    "music": {
+      "sound": "minecraft:music.overworld.deep_dark",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    }
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "arcanedims:elderlands_fossil_upper",
+      "arcanedims:elderlands_fossil_lower"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "arcanedims:trees_dark_swamp"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "spawners": {
+    "creature": [
+      {
+        "type": "minecraft:cat",
+        "weight": 500,
+        "minCount": 3,
+        "maxCount": 16
+      }
+    ]
+  },
+  "spawn_costs": {},
+  "temperature": 0.8
+}

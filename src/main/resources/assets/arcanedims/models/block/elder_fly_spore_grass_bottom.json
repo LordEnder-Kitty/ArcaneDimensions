@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "arcanedims:block/elder_fly_spore_grass_bottom"
+  }
+}

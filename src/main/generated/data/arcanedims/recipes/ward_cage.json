@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:soul_soil"
+    },
+    "B": {
+      "item": "arcanedims:blind_cage_bone"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "BSB",
+    "BEB",
+    "B#B"
+  ],
+  "result": {
+    "item": "arcanedims:ward_cage"
+  }
+}
