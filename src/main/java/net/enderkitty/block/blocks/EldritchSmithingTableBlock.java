@@ -13,6 +13,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,6 +42,18 @@ public class EldritchSmithingTableBlock extends BlockWithEntity implements Block
             player.openHandledScreen((NamedScreenHandlerFactory)((Object)blockEntity));
         }
     }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof EldritchSmithingTableBlockEntity) {
+                ItemScatterer.spawn(world, pos, (EldritchSmithingTableBlockEntity)blockEntity);
+                world.updateComparators(pos,this);
+            }
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
+    }
     
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -67,6 +80,6 @@ public class EldritchSmithingTableBlock extends BlockWithEntity implements Block
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, ArcaneDimsBlockEntities.ELDRITCH_SMITHING_TABLE_BLOCK_ENTITY,
-                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
     }
 }

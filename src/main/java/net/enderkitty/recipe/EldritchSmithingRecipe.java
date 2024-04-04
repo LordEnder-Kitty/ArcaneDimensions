@@ -2,13 +2,16 @@ package net.enderkitty.recipe;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.enderkitty.ArcaneDimensions;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
     private final Ingredient top; // 1
@@ -34,7 +37,7 @@ public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
         this.center = center;
         this.craftingTime = craftingTime;
     }
-
+    
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> defaultedList = DefaultedList.of();
@@ -45,20 +48,25 @@ public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
         defaultedList.add(this.center);
         return defaultedList;
     }
-    
-    
+
+    public int getCraftingTime() {
+        return craftingTime;
+    }
     
     @Override
     public boolean matches(SidedInventory inventory, World world) {
         if (world.isClient) return false;
         
-        return this.top.test(inventory.getStack(topIndex)) && this.bottom.test(inventory.getStack(bottomIndex)) && 
-                this.right.test(inventory.getStack(rightIndex)) && this.left.test(inventory.getStack(leftIndex)) && this.center.test(inventory.getStack(centerIndex));
+        return this.top.test(inventory.getStack(topIndex)) && 
+                this.bottom.test(inventory.getStack(bottomIndex)) && 
+                this.right.test(inventory.getStack(rightIndex)) && 
+                this.left.test(inventory.getStack(leftIndex)) && 
+                this.center.test(inventory.getStack(centerIndex));
     }
     
     @Override
     public ItemStack craft(SidedInventory inventory, DynamicRegistryManager registryManager) {
-        return result;
+        return result.copy();
     }
     @Override
     public boolean fits(int width, int height) {
@@ -69,12 +77,15 @@ public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
         return result;
     }
     
-    @Override public RecipeSerializer<?> getSerializer() { return ArcaneDimsRecipeRegistries.ELDRITCH_SMITHING_SERIALIZER; }
-    @Override public RecipeType<?> getType() { return ArcaneDimsRecipeRegistries.ELDRITCH_SMITHING_TYPE; }
+    @Override public RecipeSerializer<?> getSerializer() { return Serializer.INSTANCE; }
+    @Override public RecipeType<?> getType() { return Type.INSTANCE; }
     
     
     
     public static class Serializer implements RecipeSerializer<EldritchSmithingRecipe> {
+        public static final Serializer INSTANCE = new Serializer();
+        public static final Identifier ID = new Identifier(ArcaneDimensions.MOD_ID, "eldritch_smithing");
+        
         
         private static final Codec<EldritchSmithingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Ingredient.ALLOW_EMPTY_CODEC.fieldOf("top").forGetter(recipe -> recipe.top),
@@ -114,6 +125,12 @@ public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
             buf.writeVarInt(recipe.craftingTime);
             buf.writeItemStack(recipe.result);
         }
+    }
+
+    public static class Type implements RecipeType<EldritchSmithingRecipe> {
+        private Type() {}
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "eldritch_smithing";
     }
     
 }

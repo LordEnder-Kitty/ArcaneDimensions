@@ -1,13 +1,10 @@
 package net.enderkitty.block.block_entities;
 
 import net.enderkitty.block.ArcaneDimsBlockEntities;
-import net.enderkitty.recipe.ArcaneDimsRecipeRegistries;
 import net.enderkitty.recipe.EldritchSmithingRecipe;
 import net.enderkitty.screen.EldritchSmithingTableScreenHandler;
 import net.enderkitty.util.ImplementedInventory;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,20 +12,20 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +33,8 @@ import java.util.Optional;
 
 public class EldritchSmithingTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(7, ItemStack.EMPTY);
-    EldritchSmithingTableScreenHandler handler = (EldritchSmithingTableScreenHandler) MinecraftClient.getInstance().player.currentScreenHandler;
+    //EldritchSmithingTableScreenHandler handler = (EldritchSmithingTableScreenHandler) MinecraftClient.getInstance().player.currentScreenHandler;
+    private final RecipeManager.MatchGetter<SidedInventory, EldritchSmithingRecipe> matchGetter;
     
     private static final int OUTPUT_SLOT = 0;
     private static final int FUEL_SLOT = 6;
@@ -47,8 +45,12 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
     int craftTime;
     int maxCraftTime;
     
+    public boolean isCrafting = false;
+    
     public EldritchSmithingTableBlockEntity(BlockPos pos, BlockState state) {
         super(ArcaneDimsBlockEntities.ELDRITCH_SMITHING_TABLE_BLOCK_ENTITY, pos, state);
+        this.matchGetter = RecipeManager.createCachedMatchGetter(EldritchSmithingRecipe.Type.INSTANCE);
+        
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
@@ -140,7 +142,7 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
     }
     
     
-    public void tick(World world, BlockPos pos, BlockState state) {
+    public void tick(World world, BlockPos pos, BlockState state, EldritchSmithingTableBlockEntity blockEntity) {
         if (isBurning()) --burnTime;
         
         ItemStack fuelStack = inventory.get(FUEL_SLOT);
@@ -162,20 +164,77 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
             }
         }
         
-        if (isBurning() && handler.crafting) {
-            craft();
-            
+        if (isBurning()/* && isCrafting*/) {
+            craft(world, pos, state, blockEntity);
+            //isCrafting = false;
             
         }
     }
     
-    public void craft() {
+    public void craft(World world, BlockPos pos, BlockState state, EldritchSmithingTableBlockEntity blockEntity) {
         if (isBurning()) {
-            
-            
+            if (isOutputSlotEmptyOrReceivable()) {
+                if (hasRecipe(blockEntity)) {
+                    craftTime++;
+                    markDirty(world, pos, state);
+                    maxCraftTime = getCraftTime(blockEntity);
+                    if (craftTime >= maxCraftTime) {
+                        craftItem(blockEntity);
+                        resetProgress();
+                    }
+                } else {
+                    resetProgress();
+                }
+            } else {
+                resetProgress();
+            }
         }
-        handler.crafting = false;
     }
     
+    private void resetProgress() {
+        craftTime = 0;
+    }
+    private void craftItem(EldritchSmithingTableBlockEntity blockEntity) {
+        Optional<RecipeEntry<EldritchSmithingRecipe>> recipe = matchGetter.getFirstMatch(blockEntity, getWorld());
+        clearInputs(1);
+        setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
+    }
     
+    private void clearInputs(int count) {
+        removeStack(1, count);
+        removeStack(2, count);
+        removeStack(3, count);
+        removeStack(4, count);
+        removeStack(5, count);
+    }
+    private void clearInputs(int top, int bottom, int left, int right, int center) {
+        removeStack(1, top);
+        removeStack(2, left);
+        removeStack(3, center);
+        removeStack(4, right);
+        removeStack(5, bottom);
+    }
+
+    private int getCraftTime(EldritchSmithingTableBlockEntity blockEntity) {
+        Optional<RecipeEntry<EldritchSmithingRecipe>> recipe = matchGetter.getFirstMatch(blockEntity, getWorld());
+        return recipe.map(recipe1 -> recipe1.value().getCraftingTime()).orElse(200);
+        //recipe.get().value().getCraftingTime();
+    }
+    
+    private boolean hasRecipe(EldritchSmithingTableBlockEntity blockEntity) {
+        Optional<RecipeEntry<EldritchSmithingRecipe>> recipe = matchGetter.getFirstMatch(blockEntity, getWorld());
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null)) &&
+                canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
+    }
+    
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.getStack(OUTPUT_SLOT).getItem() == item || this.getStack(OUTPUT_SLOT).isEmpty();
+    }
+    private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
+        return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= getStack(OUTPUT_SLOT).getMaxCount();
+    }
+    private boolean isOutputSlotEmptyOrReceivable() {
+        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    }
 }

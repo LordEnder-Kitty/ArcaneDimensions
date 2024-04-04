@@ -8,14 +8,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ArcaneDimsRecipeRegistries {
-    public static final RecipeSerializer<EldritchSmithingRecipe> ELDRITCH_SMITHING_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, 
-            new Identifier(ArcaneDimensions.MOD_ID, "eldritch_smithing"), new EldritchSmithingRecipe.Serializer());
-    
-    public static final RecipeType<EldritchSmithingRecipe> ELDRITCH_SMITHING_TYPE = Registry.register(Registries.RECIPE_TYPE,
-            new Identifier(ArcaneDimensions.MOD_ID, "eldritch_smithing"), new RecipeType<EldritchSmithingRecipe>() {
-                @Override public String toString() { return "eldritch_smithing"; }
-            });
-    
-    
-    public static void register() {}
+    public static void register() {
+        Registry.register(Registries.RECIPE_SERIALIZER, EldritchSmithingRecipe.Serializer.ID, EldritchSmithingRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(ArcaneDimensions.MOD_ID, EldritchSmithingRecipe.Type.ID), EldritchSmithingRecipe.Type.INSTANCE);
+    }
 }

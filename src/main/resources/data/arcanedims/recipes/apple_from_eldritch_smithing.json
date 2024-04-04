@@ -1,0 +1,23 @@
+{
+  "type": "arcanedims:eldritch_smithing",
+  "top": {
+    "tag": "minecraft:planks"
+  },
+  "left": {
+    "tag": "minecraft:planks"
+  },
+  "center": {
+    "item": "arcanedims:ward_cage"
+  },
+  "right": {
+    "tag": "minecraft:planks"
+  },
+  "bottom": {
+    "tag": "minecraft:planks"
+  },
+  "result": {
+    "item": "minecraft:apple",
+    "count": 8
+  }, 
+  "craftingTime": 100
+}

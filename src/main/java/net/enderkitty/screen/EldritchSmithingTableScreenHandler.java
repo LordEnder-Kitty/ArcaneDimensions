@@ -1,6 +1,7 @@
 package net.enderkitty.screen;
 
 import net.enderkitty.block.block_entities.EldritchSmithingTableBlockEntity;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,7 +23,6 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     public final EldritchSmithingTableBlockEntity blockEntity;
-    public boolean crafting = false;
     
     public EldritchSmithingTableScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()), new ArrayPropertyDelegate(7));
@@ -36,13 +36,19 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.blockEntity = ((EldritchSmithingTableBlockEntity) blockEntity);
         
-        this.addSlot(new Slot(inventory, 0, 143, 13)); // Output
         this.addSlot(new Slot(inventory, 1, 62, 13)); // Top
         this.addSlot(new Slot(inventory, 2, 40, 35)); // Left
         this.addSlot(new Slot(inventory, 3, 62, 35)); // Center
         this.addSlot(new Slot(inventory, 4, 84, 35)); // Right
         this.addSlot(new Slot(inventory, 5, 62, 57)); // Bottom
-        this.addSlot(new Slot(inventory, 6, 143, 57)); // Fuel
+        
+        this.addSlot(new Slot(inventory, 0, 143, 13) { // Output
+            @Override public boolean canInsert(ItemStack stack) { return false; }
+        });
+        this.addSlot(new Slot(inventory, 6, 143, 57) { // Fuel
+            @Override public boolean canInsert(ItemStack stack) { return canUseAsFuel(stack); }
+            private static boolean canUseAsFuel(ItemStack stack) { return AbstractFurnaceBlockEntity.createFuelTimeMap().containsKey(stack.getItem()); }
+        });
         
         // Player's inventory
         for (int i = 0; i < 3; ++i) {

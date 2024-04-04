@@ -1,6 +1,7 @@
 package net.enderkitty.screen;
 
 import net.enderkitty.ArcaneDimensions;
+import net.enderkitty.block.block_entities.EldritchSmithingTableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -34,10 +35,11 @@ public class EldritchSmithingTableScreen extends HandledScreen<EldritchSmithingT
         this.y = (height - backgroundHeight) / 2;
         
         addDrawableChild(craftButton = new TexturedButtonWidget(x + 111, y + 36, 20, 14, BUTTON_TEXTURES, button1 -> {
-            craftButton.visible = false;
-            handler.crafting = true;
+            //craftButton.visible = false;
+            //handler.blockEntity.isCrafting = true;
         }));
         craftButton.setTooltip(Tooltip.of(Text.literal("Craft")));
+        craftButton.visible = false;
         
         titleY = 3;
     }
@@ -51,7 +53,7 @@ public class EldritchSmithingTableScreen extends HandledScreen<EldritchSmithingT
             context.drawGuiTexture(FUELED_TEXTURE, 14, 18, 0, 18 - l, x + 144, y + 34 + 18 - l, 14, l);
         }
         int l = MathHelper.ceil(handler.getCraftProgress() * 20.0f);
-        context.drawGuiTexture(CRAFTING_TEXTURE, 24, 16, 0, 0, x + 111, y + 36, l, 16);
+        context.drawGuiTexture(CRAFTING_TEXTURE, 20, 14, 0, 0, x + 111, y + 36, l, 14);
     }
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

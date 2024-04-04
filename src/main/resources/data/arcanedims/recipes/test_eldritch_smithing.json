@@ -1,0 +1,11 @@
+{
+  "type": "arcanedims:eldritch_smithing",
+  "center": {
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "item": "minecraft:apple",
+    "count": 8
+  }, 
+  "craftingTime": 50
+}

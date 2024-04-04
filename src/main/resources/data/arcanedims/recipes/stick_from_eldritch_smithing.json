@@ -1,0 +1,23 @@
+{
+  "type": "arcanedims:eldritch_smithing",
+  "top": {
+    "tag": "minecraft:planks"
+  },
+  "left": {
+    "item": "minecraft:apple"
+  },
+  "center": {
+    "item": "minecraft:stick"
+  },
+  "right": {
+    "item": "minecraft:apple"
+  },
+  "bottom": {
+    "tag": "minecraft:planks"
+  },
+  "result": {
+    "item": "minecraft:stick",
+    "count": 16
+  }, 
+  "craftingTime": 50
+}
