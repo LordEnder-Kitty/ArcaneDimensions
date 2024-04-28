@@ -43,8 +43,6 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
     int craftTime;
     int maxCraftTime;
     
-    //public boolean isCrafting;
-    
     public EldritchSmithingTableBlockEntity(BlockPos pos, BlockState state) {
         super(ArcaneDimsBlockEntities.ELDRITCH_SMITHING_TABLE_BLOCK_ENTITY, pos, state);
         this.matchGetter = RecipeManager.createCachedMatchGetter(EldritchSmithingRecipe.Type.INSTANCE);
@@ -97,7 +95,6 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
         nbt.putInt("CraftTime", craftTime);
         nbt.putInt("MaxCraftTime", maxCraftTime);
         nbt.putInt("BurnTime", burnTime);
-        //nbt.putBoolean("isCrafting", isCrafting);
     }
     
     @Override
@@ -107,7 +104,6 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
         craftTime = nbt.getInt("CraftTime");
         maxCraftTime = nbt.getInt("MaxCraftTime");
         burnTime = nbt.getInt("BurnTime");
-        //isCrafting = nbt.getBoolean("isCrafting");
         this.fuelTime = this.getFuelTime(this.inventory.get(1));
     }
     
@@ -173,11 +169,10 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
     public void craft(World world, BlockPos pos, BlockState state, EldritchSmithingTableBlockEntity blockEntity) {
         Optional<RecipeEntry<EldritchSmithingRecipe>> recipe = matchGetter.getFirstMatch(blockEntity, getWorld());
         
-        if (isBurning()/* && isCrafting*/) {
+        if (isBurning()) {
             if (this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount()) {
                 if (hasRecipe(recipe)) {
                     craftTime++;
-                    //if (craftTime <= 0) isCrafting = false;
                     markDirty(world, pos, state);
                     maxCraftTime = recipe.map(recipe1 -> recipe1.value().getCraftingTime()).orElse(200);
                     if (craftTime >= maxCraftTime) {
