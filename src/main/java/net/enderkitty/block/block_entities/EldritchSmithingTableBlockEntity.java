@@ -139,31 +139,32 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
     
     
     public void tick(World world, BlockPos pos, BlockState state, EldritchSmithingTableBlockEntity blockEntity) {
+        Optional<RecipeEntry<EldritchSmithingRecipe>> recipe = matchGetter.getFirstMatch(blockEntity, getWorld());
+        
         if (isBurning()) --burnTime;
         
         ItemStack fuelStack = inventory.get(FUEL_SLOT);
         
         if (isBurning() || !fuelStack.isEmpty()) {
-            if (!isBurning()) {
-                fuelTime = burnTime = getFuelTime(fuelStack);
-                if (isBurning()) {
-                    markDirty(world, pos, state);
-                    if (!fuelStack.isEmpty()) {
-                        Item item = fuelStack.getItem();
-                        fuelStack.decrement(1);
-                        if (fuelStack.isEmpty()) {
-                            Item itemRemainder = item.getRecipeRemainder();
-                            inventory.set(FUEL_SLOT, itemRemainder == null ? ItemStack.EMPTY : new ItemStack(itemRemainder));
+            if (hasRecipe(recipe)) {
+                if (!isBurning()) {
+                    fuelTime = burnTime = getFuelTime(fuelStack);
+                    if (isBurning()) {
+                        markDirty(world, pos, state);
+                        if (!fuelStack.isEmpty()) {
+                            Item item = fuelStack.getItem();
+                            fuelStack.decrement(1);
+                            if (fuelStack.isEmpty()) {
+                                Item itemRemainder = item.getRecipeRemainder();
+                                inventory.set(FUEL_SLOT, itemRemainder == null ? ItemStack.EMPTY : new ItemStack(itemRemainder));
+                            }
                         }
                     }
                 }
             }
         }
         
-        if (isBurning()) {
-            craft(world, pos, state, blockEntity);
-            
-        }
+        craft(world, pos, state, blockEntity);
     }
     
     public void craft(World world, BlockPos pos, BlockState state, EldritchSmithingTableBlockEntity blockEntity) {
@@ -185,8 +186,8 @@ public class EldritchSmithingTableBlockEntity extends BlockEntity implements Ext
             } else {
                 resetProgress();
             }
-        } else {
-            resetProgress();
+        } else if (craftTime > 0) {
+            craftTime--;
         }
     }
     

@@ -23,19 +23,20 @@ public class EldritchSmithingTableScreen extends HandledScreen<EldritchSmithingT
     @Override
     protected void init() {
         super.init();
-        titleY = 3;
+        this.backgroundHeight = 179;
+        this.playerInventoryTitleY = this.backgroundHeight - 94;
     }
     
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, 178);
         
         if (handler.isBurning()) {
             int l = MathHelper.ceil(handler.getFuelProgress() * 17.0f) + 1;
-            context.drawGuiTexture(FUELED_TEXTURE, 14, 18, 0, 18 - l, x + 144, y + 34 + 18 - l, 14, l);
+            context.drawGuiTexture(FUELED_TEXTURE, 14, 18, 0, 18 - l, x + 144, y + 40 + 18 - l, 14, l); // 34
         }
         int l = MathHelper.ceil(handler.getCraftProgress() * 20.0f);
-        context.drawGuiTexture(CRAFTING_TEXTURE, 20, 14, 0, 0, x + 111, y + 36, l, 14);
+        context.drawGuiTexture(CRAFTING_TEXTURE, 20, 14, 0, 0, x + 111, y + 42, l, 14); // 36
     }
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

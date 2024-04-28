@@ -31,16 +31,16 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.blockEntity = ((EldritchSmithingTableBlockEntity) blockEntity);
         
-        this.addSlot(new Slot(inventory, 1, 62, 13)); // Top
-        this.addSlot(new Slot(inventory, 2, 40, 35)); // Left
-        this.addSlot(new Slot(inventory, 3, 62, 35)); // Center
-        this.addSlot(new Slot(inventory, 4, 84, 35)); // Right
-        this.addSlot(new Slot(inventory, 5, 62, 57)); // Bottom
+        this.addSlot(new Slot(inventory, 1, 62, 19)); // Top
+        this.addSlot(new Slot(inventory, 2, 40, 41)); // Left
+        this.addSlot(new Slot(inventory, 3, 62, 41)); // Center
+        this.addSlot(new Slot(inventory, 4, 84, 41)); // Right
+        this.addSlot(new Slot(inventory, 5, 62, 63)); // Bottom
         
-        this.addSlot(new Slot(inventory, 0, 143, 13) { // Output
+        this.addSlot(new Slot(inventory, 0, 143, 19) { // Output
             @Override public boolean canInsert(ItemStack stack) { return false; }
         });
-        this.addSlot(new Slot(inventory, 6, 143, 57) { // Fuel
+        this.addSlot(new Slot(inventory, 6, 143, 63) { // Fuel
             @Override public boolean canInsert(ItemStack stack) { return canUseAsFuel(stack); }
             private static boolean canUseAsFuel(ItemStack stack) { return AbstractFurnaceBlockEntity.createFuelTimeMap().containsKey(stack.getItem()); }
         });
@@ -48,12 +48,12 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
         // Player's inventory
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 97 + i * 18)); // 84
             }
         }
         // Player's hotbar
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 155)); // 142
         }
         
         addProperties(propertyDelegate);
