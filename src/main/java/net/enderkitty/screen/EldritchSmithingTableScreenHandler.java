@@ -8,11 +8,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeMatcher;
-import net.minecraft.recipe.book.RecipeBookCategory;
-import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -64,9 +59,6 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
         addProperties(propertyDelegate);
     }
     
-    public boolean isCrafting() {
-        return propertyDelegate.get(0) > 0;
-    }
     public boolean isBurning() {
         return propertyDelegate.get(2) > 0;
     }
@@ -109,7 +101,6 @@ public class EldritchSmithingTableScreenHandler extends ScreenHandler {
         
         return newStack;
     }
-    
     
     @Override
     public boolean canUse(PlayerEntity player) {

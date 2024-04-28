@@ -7,10 +7,6 @@
 	"authors": [
 		"LordEnder_Kitty"
 	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
 	"license": "MIT",
 	"icon": "assets/arcanedims/icon.png",
 	"environment": "*",

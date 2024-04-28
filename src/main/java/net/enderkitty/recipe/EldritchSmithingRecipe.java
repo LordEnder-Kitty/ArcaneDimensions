@@ -88,13 +88,13 @@ public class EldritchSmithingRecipe implements Recipe<SidedInventory> {
         
         
         private static final Codec<EldritchSmithingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("top").forGetter(recipe -> recipe.top),
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("bottom").forGetter(recipe -> recipe.bottom),
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("right").forGetter(recipe -> recipe.right),
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("left").forGetter(recipe -> recipe.left),
-                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("center").forGetter(recipe -> recipe.center),
+                Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("top", Ingredient.EMPTY).forGetter(recipe -> recipe.top),
+                Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("bottom", Ingredient.EMPTY).forGetter(recipe -> recipe.bottom),
+                Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("right", Ingredient.EMPTY).forGetter(recipe -> recipe.right),
+                Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("left", Ingredient.EMPTY).forGetter(recipe -> recipe.left),
+                Ingredient.ALLOW_EMPTY_CODEC.optionalFieldOf("center", Ingredient.EMPTY).forGetter(recipe -> recipe.center),
                 ItemStack.RECIPE_RESULT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                Codec.INT.fieldOf("craftingTime").forGetter(recipe -> recipe.craftingTime)
+                Codec.INT.optionalFieldOf("craftingTime", 200).forGetter(recipe -> recipe.craftingTime)
         ).apply(instance, EldritchSmithingRecipe::new));
         
         

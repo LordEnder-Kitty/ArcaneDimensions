@@ -35,33 +35,27 @@ public class ArcaneDimensionsClient implements ClientModInitializer {
         ArcaneDimsColors.registerBlockColors();
         ArcaneDimsColors.registerItemColors();
         
+        
         ParticleRenderEvents.ALLOW_BLOCK_DUST_TINT.register(((state, world, pos) -> !state.isOf(ArcaneDimsBlocks.ELDER_GRASS_BLOCK)));
         
         FlammableAndStrippable.registerFlammable();
         FlammableAndStrippable.registerStrippable();
-
-        DimensionRenderingRegistry.registerDimensionEffects(ArcaneDimsDimensionTypes.THE_ELDERLANDS_ID, ElderlandsDimensionEffects.elderlands);
         
         ArcaneDimsModelPredicateProviders.registerPredicates();
 
         ParticleFactoryRegistry.getInstance().register(ArcaneDimsParticles.ELDER_FLY_SPORE, ElderFlySporeParticle.Factory::new);
-        
+
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, MiscIdentifiers.SENIOREM_SIGN_TEXTURE));
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, MiscIdentifiers.SENIOREM_HANGING_SIGN_TEXTURE));
-        
+
         TerraformBoatClientHelper.registerModelLayers(ArcaneDimsBoats.SENIOREM_BOAT_ID, false);
 
         HandledScreens.register(ArcaneDimsScreenHandlers.ELDRITCH_SMITHING_TABLE_SCREEN_HANDLER, EldritchSmithingTableScreen::new);
-        
+
         EntityRendererRegistry.register(ArcaneDimsEntities.SOUL_SWARM, InvisibleEntityRenderer::new);
         EntityRendererRegistry.register(ArcaneDimsEntities.ELDER_FLY, InvisibleEntityRenderer::new);
         EntityRendererRegistry.register(ArcaneDimsEntities.SOUL_CHARGE, InvisibleEntityRenderer::new);
         
-        
-        //LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
-        //    if (entityRenderer instanceof PlayerEntityRenderer playerEntityRenderer) {
-        //        registrationHelper.register(new LordEnder_KittyFeatureRenderer(playerEntityRenderer));
-        //    }
-        //});
+        DimensionRenderingRegistry.registerDimensionEffects(ArcaneDimsDimensionTypes.THE_ELDERLANDS_ID, ElderlandsDimensionEffects.elderlands);
     }
 }
