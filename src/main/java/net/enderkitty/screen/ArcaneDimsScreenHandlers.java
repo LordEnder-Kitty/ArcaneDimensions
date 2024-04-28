@@ -12,5 +12,5 @@ public class ArcaneDimsScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(ArcaneDimensions.MOD_ID, "eldritch_smithing"),
                     new ExtendedScreenHandlerType<>(EldritchSmithingTableScreenHandler::new));
     
-    public static void register() {}
+    public static void init() {}
 }

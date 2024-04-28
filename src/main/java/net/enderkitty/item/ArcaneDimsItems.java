@@ -49,5 +49,5 @@ public class ArcaneDimsItems {
         return Registry.register(Registries.ITEM, new Identifier(ArcaneDimensions.MOD_ID, name), item);
     }
     
-    public static void registerClass() {}
+    public static void init() {}
 }

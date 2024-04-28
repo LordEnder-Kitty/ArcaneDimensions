@@ -23,18 +23,18 @@ public class ArcaneDimensions implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-		ArcaneDimsItems.registerClass();
-		ArcaneDimsBlocks.registerClass();
-		ArcaneDimsItemGroups.registerClass();
-		ArcaneDimsBlockEntities.registerClass();
+		ArcaneDimsItems.init();
+		ArcaneDimsBlocks.init();
+		ArcaneDimsItemGroups.init();
+		ArcaneDimsBlockEntities.init();
+		ArcaneDimsSoundEvents.init();
 		ArcaneDimsBoats.registerBoats();
-		ArcaneDimsSoundEvents.registerClass();
 		
 		LootTableModifiers.modifyLootTables();
 		
 		ArcaneDimsParticles.register();
 		
-		ArcaneDimsScreenHandlers.register();
+		ArcaneDimsScreenHandlers.init();
 		ArcaneDimsRecipeRegistries.register();
 		
 		FabricDefaultAttributeRegistry.register(ArcaneDimsEntities.SOUL_SWARM, SoulSwarmEntity.createAttributes());

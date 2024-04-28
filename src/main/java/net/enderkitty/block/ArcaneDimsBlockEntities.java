@@ -20,5 +20,5 @@ public class ArcaneDimsBlockEntities {
             FabricBlockEntityTypeBuilder.create(EldritchSmithingTableBlockEntity::new, ArcaneDimsBlocks.ELDRITCH_SMITHING_TABLE).build());
 
 
-    public static void registerClass() {}
+    public static void init() {}
 }

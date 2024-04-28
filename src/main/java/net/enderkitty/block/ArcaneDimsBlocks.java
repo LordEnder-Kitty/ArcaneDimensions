@@ -96,5 +96,5 @@ public class ArcaneDimsBlocks {
         return Registry.register(Registries.ITEM, new Identifier(ArcaneDimensions.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
     }
     
-    public static void registerClass() {}
+    public static void init() {}
 }

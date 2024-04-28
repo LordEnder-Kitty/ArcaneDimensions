@@ -15,5 +15,5 @@ public class ArcaneDimsSoundEvents {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
     
-    public static void registerClass() {}
+    public static void init() {}
 }

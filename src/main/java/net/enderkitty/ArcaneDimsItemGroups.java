@@ -1,6 +1,5 @@
 package net.enderkitty;
 
-import net.enderkitty.ArcaneDimensions;
 import net.enderkitty.block.ArcaneDimsBlocks;
 import net.enderkitty.item.ArcaneDimsItems;
 import net.enderkitty.item.items.TheElderlandsKeyItem;
@@ -59,5 +58,5 @@ public class ArcaneDimsItemGroups {
                         
                     }).build());
     
-    public static void registerClass() {}
+    public static void init() {}
 }
